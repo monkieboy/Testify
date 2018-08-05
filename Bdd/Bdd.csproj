@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Testify.Bdd</RootNamespace>
+    <AssemblyName>Testify.Bdd</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="xunit.abstractions">
+      <HintPath>..\..\..\Users\Info\.nuget\packages\xunit.abstractions\2.0.1\lib\netstandard1.0\xunit.abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
