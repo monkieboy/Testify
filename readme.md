@@ -35,3 +35,8 @@ Here is a basic usage:
                 .And("Double check 'And' on When", Noop)
                 .Then("About to verify something expected changed", Noop)
                 .Verify();
+
+## Notes
+Requires Xunit, doesn't work with other test libraries. I have no plans to make it work, unless I need it for another testing library. Might be never, might be next week, alternatively, feel free to submit a PR.
+
+I added a R# snippet so that you can create a 'Live Template' using it and assign it to the 'spec' keyword for example.

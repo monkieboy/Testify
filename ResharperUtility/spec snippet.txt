@@ -1,0 +1,40 @@
+using Xunit;
+
+using FluentAssertions;
+using Testify.Bdd;
+using Xunit.Abstractions;
+using OpenQA.Selenium;
+
+namespace ClientTech.Web.AutomationTests.Specs
+{
+    public class $SPECNAME$ : ClientTech.Web.AutomationTests.TestBase
+    {
+        private readonly Xunit.Abstractions.ITestOutputHelper _output;
+        private readonly Testify.Bdd.Feature _feature;
+
+        public $SPECNAME$(Xunit.Abstractions.ITestOutputHelper output) : base(output)
+        {
+            _output = output;
+            var featureFactory = new Testify.Bdd.FeatureFactory(output);
+            _feature = featureFactory.Create("$FEATURE$", "$DESCRIPTION$");
+        }
+
+        [Xunit.FactAttribute]
+        public void $STORY$()
+        {
+            var result =
+                _feature
+                    .WithScenario("$SCENARIO$")
+                    .Given("$GIVEN$", EmptyStep)
+                    .When("$WHEN$", EmptyStep)
+                    .Then("$THEN$", EmptyStep)
+                    .Verify();
+
+            result.Success.Should().BeTrue();
+        }
+        private void EmptyStep()
+        {
+            _output.WriteLine("empty step in test");
+        }
+    }
+}
