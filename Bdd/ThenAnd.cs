@@ -3,16 +3,19 @@ using Xunit.Abstractions;
 
 namespace Testify.Bdd
 {
-    public class Then
+    public class ThenAnd
     {
         private readonly ITestOutputHelper _output;
         private readonly StepQueue _stepQueue;
+        private Then _then;
+        private ThenAnd _thenAnd;
+        private string _and;
 
-        public Then(ITestOutputHelper output, StepQueue stepQueue, string then, Action step)
+        public ThenAnd(ITestOutputHelper output, StepQueue stepQueue, string and, Action step)
         {
             _output = output;
             _stepQueue = stepQueue;
-            _stepQueue.Enqueue(new Spec(SpecType.Then, then, step));
+            _stepQueue.Enqueue(new Spec(SpecType.And, and, step));
         }
 
         public ThenAnd And(string and, Action step)

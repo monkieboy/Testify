@@ -35,7 +35,7 @@ namespace Testify.Bdd
             _errors.ForEach(x => _output.WriteLine($"{x.Message}\r\n"));
             _story = stepQueue.Story();
             _output.WriteLine(_story);
-            if (!Success) throw new Exception("Test Failed. See output for more details.");
+            if (!Success) throw new TestFailureException("Test Failed. See output for more details.", _story, _errors);
         }
 
         public string Story => _story;

@@ -11,12 +11,15 @@ namespace Bdd.Tests
         readonly FeatureFactory _featureFactory;
         private Feature _feature;
 
+        public ITestOutputHelper Output { get; }
+
         public BddExample(ITestOutputHelper output)
         {
             _featureFactory = new FeatureFactory(output);
             _feature = _featureFactory.Create(
                 "Broken Feature",
                 "Feature that has a list of errors");
+            Output = output;
         }
 
         private static void Noop() { }
@@ -33,6 +36,7 @@ namespace Bdd.Tests
                 .And("Something else may have occured", Noop)
                 .And("Double check 'And' on When", Noop)
                 .Then("About to verify something expected changed", Noop)
+                .And("Now then has and also", Noop)
                 .Verify();
 
         }
@@ -64,17 +68,21 @@ namespace Bdd.Tests
         }
 
         [Fact]
-        public void Should_report_errors()
+        public void TestFailureException_thrown_when_an_error_is_encountered()
         {
-            var result =
+            var ex =
+              Assert.ThrowsAny<TestFailureException>(() =>
                 _feature
                 .WithScenario("This should error")
                 .Given("The Given clause is invalid", () => throw new NotImplementedException())
                 .When("This clause is called", () => throw new Exception("The When Failed"))
                 .Then("This may as well fail also", () => throw new Exception("The Then failed too!"))
-                .Verify();
+                .Verify()
+            );
 
-            result.Errors().Should().HaveCount(3);
+            ex.Errors.Should().HaveCount(3);
+
+            Output.WriteLine($"First Error: {ex.Errors[2].Message}");
         }
     }
 }
