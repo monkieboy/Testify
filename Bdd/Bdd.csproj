@@ -12,7 +12,7 @@
     <PackageId>Testify.Bdd</PackageId>
     <PackageTags>Bdd;testing;integration;test;web</PackageTags>
     <PackageProjectUrl>https://github.com/monkieboy/testify</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/monkieboy/testify/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/monkieboy/Testify/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
