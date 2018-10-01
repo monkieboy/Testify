@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Testify.Bdd
 {
-    public class StepQueue
+    internal class StepQueue
     {
         internal readonly List<Spec> Steps;
         private readonly StringBuilder _story = new StringBuilder();

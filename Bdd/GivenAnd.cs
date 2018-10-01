@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit.Abstractions;
 
 namespace Testify.Bdd
 {
-    public class GivenAnd
+    public class GivenAnd : ISpec
     {
         private readonly ITestOutputHelper _output;
         private readonly StepQueue _stepQueue;
-
-        public GivenAnd(ITestOutputHelper output, StepQueue stepQueue, string and, Action step)
+        internal List<Exception> Errors = new List<Exception>();
+        internal string Story;
+        
+        internal GivenAnd(ITestOutputHelper output, StepQueue stepQueue, string and, Action step)
         {
             _output = output;
             _stepQueue = stepQueue;
@@ -17,12 +20,12 @@ namespace Testify.Bdd
 
         public GivenAnd And(string and, Action step)
         {
-            return new GivenAnd(_output, _stepQueue, and, step);
+            return new GivenAnd(_output, _stepQueue, and, step) {Errors = Errors, Story = Story};
         }
 
         public When When(string when, Action step)
         {
-            return new When(_output, _stepQueue, when, step);
+            return new When(_output, _stepQueue, when, step) {Errors = Errors, Story = Story};
         }
     }
 }

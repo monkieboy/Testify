@@ -8,7 +8,7 @@ namespace Testify.Bdd
         private readonly ITestOutputHelper _output;
         internal StepQueue StepQueue = new StepQueue();
 
-        public Feature(ITestOutputHelper output, string feature, string description)
+        internal Feature(ITestOutputHelper output, string feature, string description)
         {
             if (string.IsNullOrWhiteSpace(feature)) throw new ArgumentNullException(nameof(feature), "Feature should be named.");
             _output = output;

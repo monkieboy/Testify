@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using Xunit.Abstractions;
 
@@ -10,11 +8,10 @@ namespace Testify.Bdd
     public class BddResult
     {
         private readonly ITestOutputHelper _output;
-        private readonly List<Exception> _errors = new List<Exception>();
+        internal List<Exception> Errors = new List<Exception>();
         private readonly StringBuilder _messages = new StringBuilder();
-        private readonly string _story;
 
-        internal BddResult(ITestOutputHelper output, StepQueue stepQueue)
+        internal BddResult(ITestOutputHelper output, StepQueue stepQueue, string story = "")
         {
             _output = output;
             stepQueue.Steps.ForEach(x =>
@@ -25,33 +22,31 @@ namespace Testify.Bdd
                 }
                 catch(NotImplementedException e)
                 {
-                    _errors.Add(e);
+                    Errors.Add(e);
                 }
                 catch (Exception e)
                 {
-                    _errors.Add(e);
+                    Errors.Add(e);
                 }
             });
-            _errors.ForEach(x => _output.WriteLine($"{x.Message}\r\n"));
-            _story = stepQueue.Story();
-            _output.WriteLine(_story);
-            if (!Success) throw new TestFailureException("Test Failed. See output for more details.", _story, _errors);
+            Errors.ForEach(x => _output.WriteLine($"{x.Message}\r\n"));
+            var s = stepQueue.Story();
+            _output.WriteLine(s);
+            if (!Success) throw new TestFailureException("Test Failed. See output for more details.", s, Errors);
         }
-
-        public string Story => _story;
 
         public string ErrorMessages()
         {
-            _errors.ForEach(x => _messages.AppendLine($"{x.Message}"));
+            Errors.ForEach(x => _messages.AppendLine($"{x.Message}"));
 
             return _messages.ToString();
         }
 
-        public List<Exception> Errors()
+        public List<Exception> ErrorList()
         {
-            return _errors;
+            return Errors;
         }
 
-        public bool Success => _errors.Count == 0;
+        public bool Success => Errors.Count == 0;
     }
 }

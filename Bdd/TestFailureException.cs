@@ -4,6 +4,9 @@ using System.Runtime.Serialization;
 
 namespace Testify.Bdd
 {
+    /// <summary>
+    /// This exception captures a basic set of reasons why a test failed.
+    /// </summary>
     [Serializable]
     public class TestFailureException : Exception
     {

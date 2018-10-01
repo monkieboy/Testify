@@ -15,12 +15,19 @@
     <PackageLicenseUrl>https://github.com/monkieboy/Testify/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <Dependencies>
+      <dependency Id="xunit" Version="2.3.1" />
+    </Dependencies>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="xunit.abstractions">
       <HintPath>..\..\..\Users\Info\.nuget\packages\xunit.abstractions\2.0.1\lib\netstandard1.0\xunit.abstractions.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="2.3.1" />
   </ItemGroup>
 
 </Project>

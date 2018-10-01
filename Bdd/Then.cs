@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit.Abstractions;
 
 namespace Testify.Bdd
 {
-    public class Then
+    /// <summary>
+    /// Then Step in the spec build
+    /// </summary>
+    public class Then : ISpec
     {
         private readonly ITestOutputHelper _output;
         private readonly StepQueue _stepQueue;
-
-        public Then(ITestOutputHelper output, StepQueue stepQueue, string then, Action step)
+        internal List<Exception> Errors = new List<Exception>();
+        internal string Story;
+        
+        internal Then(ITestOutputHelper output, StepQueue stepQueue, string then, Action step)
         {
             _output = output;
             _stepQueue = stepQueue;
@@ -17,12 +23,12 @@ namespace Testify.Bdd
 
         public ThenAnd And(string and, Action step)
         {
-            return new ThenAnd(_output, _stepQueue, and, step);
+            return new ThenAnd(_output, _stepQueue, and, step) {Errors = Errors, Story = Story};
         }
 
         public BddResult Verify()
         {
-            return new BddResult(_output, _stepQueue);
+            return new BddResult(_output, _stepQueue, Story) {Errors = Errors};
         }
     }
 }

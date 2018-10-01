@@ -40,19 +40,7 @@ namespace Bdd.Tests
                 .Verify();
 
         }
-
-        [Fact]
-        public void Story_is_collated()
-        {
-            var bddResult = _featureFactory.Create("Feature", "Description")
-                .WithScenario("Scenario")
-                .Given("One", Noop)
-                .When("Two", Noop)
-                .Then("Three", Noop)
-                .Verify();
-
-            bddResult.Story.Should().Be("FEATURE:\r\n\tFeature\r\n\r\nDESCRIPTION:\r\n\tDescription\r\n\r\nSCENARIO:\r\n\tScenario\r\n\r\nGiven One\r\nWhen Two\r\nThen Three\r\n");
-        }
+        
 
         [Fact]
         public void Test_should_pass()
