@@ -5,9 +5,9 @@ using Testify.Bdd;
 using Xunit.Abstractions;
 using OpenQA.Selenium;
 
-namespace ClientTech.Web.AutomationTests.Specs
+namespace $PROJECT_NAME$.AutomationTests.Specs
 {
-    public class $SPECNAME$ : ClientTech.Web.AutomationTests.TestBase
+    public class $SPECNAME$ : $PROJECT_NAME$.AutomationTests.TestBase
     {
         private readonly Xunit.Abstractions.ITestOutputHelper _output;
         private readonly Testify.Bdd.Feature _feature;
